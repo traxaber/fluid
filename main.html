@@ -7,18 +7,36 @@ div{
 	font-family: 'Inconsolata', monospace;
 }
 
+#promptwrapper{
+	text-align:left; 
+	margin: 0 auto; 
+	width:50%; 
+	overflow:hidden; 
+	font-size:30px;
+	white-space:nowrap; 
+	background: #fff;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+#typeinput{
+	font-size:40px;
+	font-family:'Roboto Light';
+	padding: 10px;
+	border-radius: 5px;;
+}
+
 </style>
 
 
+<body style="text-align:center; background:#333">
 <h1 style="font-family:'Roboto'; font-size:500%">fluid</h1>
-<body style="text-align:center">
-	<div style="text-align:left; margin: 0 auto; width:50%; overflow:hidden; font-size:30px">
- 		<div id="done" style="color:green; float:left">this is a test</div>
+	<div id = "promptwrapper">
 		<div id="prompt" style="float:left">Raindrops the size of bullets thundered on the castle windows for days on end; the lake rose, the flower beds turned into muddy streams, and Hagrid's pumpkins swelled to the size of garden sheds. Oliver Wood's enthusiasm for regular training sessions, however, was not dampened, which was why Harry was to be found, late one stormy Saturday afternoon a few days before Halloween, returning to Gryffindor Tower, drenched to the skin and splattered with mud.</div>
 	</div>
 
 	<br><br><br><br>
-	<input type="text" id="typeinput" style="font-size:40px"><br>
+	<input type="text" id="typeinput"><br>
 
 </body>
 
@@ -43,13 +61,18 @@ input.addEventListener('input', function() {
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
     if(lastChar === ' ' && this.value === promptArr[curr]+" ") {
-    	document.getElementById('done').innerHTML += promptArr[curr] + " ";
     	promptDiv.innerHTML = promptDiv.innerHTML.substring(promptArr[curr].length+1);
         // clear the board
         this.value = "";
         curr++;
-
     }
+    
+    if (this.value.length > 0 && this.value !== promptArr[curr].substring(0, this.value.length)){
+    	input.style.background = "#f00";
+    } else {
+    	input.style.background = "#fff";
+    }
+
 });
 
 
