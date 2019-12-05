@@ -1,6 +1,9 @@
 <h1>hello world</h1>
 <body style="text-align:center">
-	<div id="prompt" style="text-align:left; margin: 0 auto; width: 50%">this is the stuff you're supposed to type</div>
+	<div style="text-align:left; margin: 0 auto; width:50%; overflow:hidden">
+		<div id="done" style="color:green; float:left"></div>
+		<div id="prompt" style="float:left">this is the stuff you're supposed to type</div>
+	</div>
 	<input type="text" id="typeinput"><br>
 
 </body>
@@ -10,18 +13,14 @@
 
 
 var promptArr = document.getElementById('prompt').innerHTML.split(" ");
-
-/*
-for (i = 0; i < promptArr.length; i++){
-	document.writeln((i+1) + ": " + promptArr[i]);
-}
-*/
+var promptDiv = document.getElementById('prompt');
 
 var input = document.getElementById('typeinput');
 var curr = 0;
 
+var doneText = "";
+
 input.addEventListener('input', function() {
-	// alert(promptArr[curr]);
 
     // Get cursor position
     var start = this.selectionStart;
@@ -30,12 +29,12 @@ input.addEventListener('input', function() {
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
     if(lastChar === ' ' && this.value === promptArr[curr]+" ") {
-    	
+    	document.getElementById('done').innerHTML += promptArr[curr] + "&nbsp";
+    	promptDiv.innerHTML = promptDiv.innerHTML.substring(promptArr[curr].length+1);
         // clear the board
         this.value = "";
         curr++;
 
-        //TODO proceed to next word in prompt
     }
 });
 
