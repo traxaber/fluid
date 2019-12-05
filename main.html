@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
@@ -46,8 +46,10 @@ var input = document.getElementById('typeinput');
 var curr = 0;
 var first = true;
 
+// listens to keystrokes in input box
 input.addEventListener('input', function() {
 
+	// set starting time to measure wpm
 	if (curr === 0 && first){
 		startTime = Date.now();
 		first = false;
@@ -59,6 +61,7 @@ input.addEventListener('input', function() {
     // Get last typed character
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
+    // clears input box if correct word is typed
     if((lastChar === ' ' && this.value === promptArr[curr]+" ") || (curr === promptArr.length-1 && this.value === promptArr[curr])) {
         // append to completed string
         completed += this.value;
@@ -74,12 +77,14 @@ input.addEventListener('input', function() {
         curr++;
     }
 
+    // set background of input box to red if incorrect character is typed
     if (this.value.length > 0 && this.value !== promptArr[curr].substring(0, this.value.length)){
     	this.style.background = "#d77";
     } else {
     	this.style.background = "#fff";
     }
 
+    // end prompt if last word is typed (space not necessary)
     if (curr === promptArr.length){
     	document.getElementById('promptwrapper').style.background = "#7d7";
     	promptDiv.innerHTML = "you're done!";
@@ -87,7 +92,7 @@ input.addEventListener('input', function() {
 
 });
 
-
+// sets new prompt, taken from prompts list, and resets variables
 function newPrompt() {
 	var rand = Math.floor(Math.random() * prompts.length);
 	promptDiv.innerHTML = prompts[rand];
