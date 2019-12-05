@@ -1,0 +1,22 @@
+div{
+	font-family: 'Inconsolata', monospace;
+}
+
+#promptwrapper{
+	text-align:left; 
+	margin: 0 auto; 
+	width:50%; 
+	overflow:hidden; 
+	font-size:30px;
+	white-space:nowrap; 
+	background: #fff;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+#typeinput{
+	font-size:40px;
+	font-family:'Roboto Light';
+	padding: 10px;
+	border-radius: 5px;;
+}
