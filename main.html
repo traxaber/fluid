@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-<link href="style.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
 
 
 <center><h1 style="font-family:'Roboto'; font-size:500%">fluid</h1></center>
@@ -28,7 +28,7 @@
 
 </body>
 
-<script src="prompts.js"></script>
+<script src="js/prompts.js"></script>
 
 <script>
 
@@ -92,6 +92,7 @@ function newPrompt() {
 	curr = 0;
 	first = true;
 	promptArr = document.getElementById('prompt').innerHTML.split(" ");
+    document.getElementById('promptwrapper').style.background = "#fff";
 	completed = "";
 }
 
