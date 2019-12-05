@@ -10,12 +10,20 @@
 	</div>
 
 	<br><br><br><br>
-	<input type="text" id="typeinput"><br>
+	<input type="text" id="typeinput">
+
+	<br><br><br>
+
+	<button onclick="newPrompt()">Refresh</button>
+
 
 </body>
 
+<script src="prompts.js"></script>
 
 <script>
+
+var startTime = 0;
 
 var promptArr = document.getElementById('prompt').innerHTML.split(" ");
 var promptDiv = document.getElementById('prompt');
@@ -23,9 +31,14 @@ var promptDiv = document.getElementById('prompt');
 var input = document.getElementById('typeinput');
 var curr = 0;
 
-var doneText = "";
-
 input.addEventListener('input', function() {
+
+	alert(this.value.length);
+	if (curr === 0 && this.value.length === 0){
+		startTime = Date.now();
+	}
+
+	alert(startTime);
 
     // Get cursor position
     var start = this.selectionStart;
@@ -52,6 +65,13 @@ input.addEventListener('input', function() {
     }
 
 });
+
+
+function newPrompt() {
+	var rand = Math.floor(Math.random() * prompts.length);
+	promptDiv.innerHTML = prompts[rand];
+	curr = 0;
+}
 
 
 </script>
