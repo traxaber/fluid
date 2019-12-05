@@ -1,1 +1,24 @@
 <h1>hello world</h1>
+<div>this is the stuff you're supposed to type</div>
+<input type="text" id="typeinput"><br>
+
+
+<script>
+
+
+var input = document.getElementById('typeinput');
+
+input.addEventListener('input', function() {
+    // Get cursor position
+    var start = this.selectionStart;
+
+    // Get last typed character
+    var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
+
+    if(lastChar === ' ') {
+        // do something
+        this.value = "";
+    }
+});
+
+</script>
