@@ -6,7 +6,7 @@
 <body style="text-align:center; background:#333">
 <h1 style="font-family:'Roboto'; font-size:500%">fluid</h1>
 	<div id = "promptwrapper">
-		<div id="prompt" style="float:left">Raindrops the size of bullets thundered on the castle windows for days on end; the lake rose, the flower beds turned into muddy streams, and Hagrid's pumpkins swelled to the size of garden sheds. Oliver Wood's enthusiasm for regular training sessions, however, was not dampened, which was why Harry was to be found, late one stormy Saturday afternoon a few days before Halloween, returning to Gryffindor Tower, drenched to the skin and splattered with mud.</div>
+		<div id="prompt" style="float:left">The quick brown fox jumped over the lazy dog.</div>
 	</div>
 
 	<br><br><br><br>
@@ -33,7 +33,7 @@ input.addEventListener('input', function() {
     // Get last typed character
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
-    if(lastChar === ' ' && this.value === promptArr[curr]+" ") {
+    if((lastChar === ' ' && this.value === promptArr[curr]+" ") || (curr === promptArr.length-1 && this.value === promptArr[curr])) {
     	promptDiv.innerHTML = promptDiv.innerHTML.substring(promptArr[curr].length+1);
         // clear the board
         this.value = "";
@@ -41,9 +41,14 @@ input.addEventListener('input', function() {
     }
 
     if (this.value.length > 0 && this.value !== promptArr[curr].substring(0, this.value.length)){
-    	input.style.background = "#f00";
+    	this.style.background = "#d77";
     } else {
-    	input.style.background = "#fff";
+    	this.style.background = "#fff";
+    }
+
+    if (curr === promptArr.length){
+    	document.getElementById('promptwrapper').style.background = "#7d7";
+    	promptDiv.innerHTML = "you're done!";
     }
 
 });
