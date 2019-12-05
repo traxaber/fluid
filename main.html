@@ -1,24 +1,43 @@
 <h1>hello world</h1>
-<div>this is the stuff you're supposed to type</div>
-<input type="text" id="typeinput"><br>
+<body style="text-align:center">
+	<div id="prompt" style="text-align:left; margin: 0 auto; width: 50%">this is the stuff you're supposed to type</div>
+	<input type="text" id="typeinput"><br>
+
+</body>
 
 
 <script>
 
 
+var promptArr = document.getElementById('prompt').innerHTML.split(" ");
+
+/*
+for (i = 0; i < promptArr.length; i++){
+	document.writeln((i+1) + ": " + promptArr[i]);
+}
+*/
+
 var input = document.getElementById('typeinput');
+var curr = 0;
 
 input.addEventListener('input', function() {
+	// alert(promptArr[curr]);
+
     // Get cursor position
     var start = this.selectionStart;
 
     // Get last typed character
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
-    if(lastChar === ' ') {
-        // do something
+    if(lastChar === ' ' && this.value === promptArr[curr]+" ") {
+    	
+        // clear the board
         this.value = "";
+        curr++;
+
+        //TODO proceed to next word in prompt
     }
 });
+
 
 </script>
