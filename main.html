@@ -19,8 +19,8 @@
 	<br>
 
 	<div id="buttonwrapper">
-		<button class="btn btn-secondary" onclick="top(100)">top 100</button>
-		<button class="btn btn-secondary" onclick="top(1000)">top 1000</button>
+		<button class="btn btn-secondary" onclick="topen(100)">top 100</button>
+		<button class="btn btn-secondary" onclick="topen(1000)">top 1000</button>
 	</div>
 
 	<br><br><br><br>
@@ -113,13 +113,16 @@ function newPrompt() {
 }
 
 // sets new prompt, taken from top n words in english varible
-function top(n) {
+function topen(n) {
 	var bank = eval("top" + n.toString());
 
 	var finPrompt = "";
-	for (i=0;i<n;i++){
-		finPrompt+= bank[Math.floor(Math.random() * bank.length)];
+	for (i=0;i<49;i++){
+		finPrompt+= bank[Math.floor(Math.random() * bank.length)]+" ";
 	}
+	finPrompt+= bank[Math.floor(Math.random() * bank.length)];
+
+
 	promptDiv.innerHTML = finPrompt;
 	curr = 0;
 	first = true;
