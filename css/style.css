@@ -23,6 +23,13 @@ div{
 	border-radius: 5px;
 }
 
+#buttonwrapper{
+	text-align:left; 
+	margin: 0 auto; 
+	width:50%; 
+	font-size:30px;
+}
+
 #typeinput{
 	font-size:40px;
 	font-family:'Roboto';

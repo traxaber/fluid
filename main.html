@@ -16,7 +16,15 @@
 		<div id="prompt" style="float:left">The quick brown fox jumped over the lazy dog.</div>
 	</div>
 
+	<br>
+
+	<div id="buttonwrapper">
+		<button class="btn btn-secondary" onclick="top(100)">top 100</button>
+		<button class="btn btn-secondary" onclick="top(1000)">top 1000</button>
+	</div>
+
 	<br><br><br><br>
+
 	<div style="text-align:center">
 		<input type="text" id="typeinput">
 	</div>
@@ -31,6 +39,7 @@
 </body>
 
 <script src="js/prompts.js"></script>
+<script src="js/topPrompts.js"></script>
 
 <script>
 
@@ -103,5 +112,20 @@ function newPrompt() {
 	completed = "";
 }
 
+// sets new prompt, taken from top n words in english varible
+function top(n) {
+	var bank = eval("top" + n.toString());
+
+	var finPrompt = "";
+	for (i=0;i<n;i++){
+		finPrompt+= bank[Math.floor(Math.random() * bank.length)];
+	}
+	promptDiv.innerHTML = finPrompt;
+	curr = 0;
+	first = true;
+	promptArr = promptDiv.innerHTML.split(" ");
+    document.getElementById('promptwrapper').style.background = "#fff";
+	completed = "";
+}
 
 </script>
