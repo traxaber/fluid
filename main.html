@@ -2,8 +2,8 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
-<br><br><br>
-<center><h1 style="font-family:'Roboto'; font-size:500%"></h1></center>
+<br>
+<h1 id="title" style="font-family:'Roboto'; font-size:500%">fluid</h1>
 
 <body id="mainbody">
 
@@ -25,8 +25,9 @@
 
 	<br><br><br><br>
 
-	<div style="text-align:center">
-		<div><input type="text" id="typeinput" placeholder="Type Here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type Here'"></div>
+	<div id="inputwrapper" style="text-align:center">
+		<div><input type="text" id="typeinput" autocorrect="off" autocapitalize="none" placeholder="Type Here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type Here'"></div>
+		<button id="redobutton" onclick="redo()">redo</button>
 	</div>
 
 </body>
@@ -50,6 +51,10 @@ var input = document.getElementById('typeinput');
 var curr = 0;
 var done = false;
 var first = true;
+
+var last = ""; // last chosen prompt mode
+
+input.focus(); // set cursor focus to input box
 
 // listens to keystrokes in input box
 input.addEventListener('input', function() {
@@ -102,40 +107,53 @@ input.addEventListener('input', function() {
 
 // sets new prompt, taken from prompts list, and resets variables
 function newPrompt() {
+	last = "newPrompt";
 	var rand = Math.floor(Math.random() * prompts.length);
 	promptArr = prompts[rand].split(' ');
-	promptDiv.innerHTML = "";
-	for (var i=0; i<promptArr.length; i++){
-		promptDiv.innerHTML += "<span>" + promptArr[i] + " </span>";
-	}
-	curr = 0;
-	first = true;
-	done = false;
-	promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
-	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
-	completed = "";
+
+	reset();
 }
 
 // sets new prompt, taken from top n words in english variable
 function topen(n) {
 	var bank = eval("top" + n.toString());
+	last = "top" + n.toString();
 
-	promptDiv.innerHTML = "";
 	promptArr = [];
 	for (i=0;i<49;i++){
 		promptArr.push(bank[Math.floor(Math.random() * bank.length)]);
 	}
 	promptArr.push(bank[Math.floor(Math.random() * bank.length)]);
 
+	reset();
+}
+
+// redo button
+function redo(){
+	if (last == "top100") topen(100);
+	else if (last == "top1000") topen(1000);
+	else newPrompt();
+}
+
+// reset necessary prompt variables
+function reset(){
+	promptDiv.innerHTML = "";
 	for (var i=0; i<promptArr.length; i++){
 		promptDiv.innerHTML += "<span>" + promptArr[i] + " </span>";
 	}
+
 	curr = 0;
 	first = true;
 	done = false;
     promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
 	completed = "";
+	input.value = "";
+	input.focus();
+}
+
+function finishAnimation(){
+	
 }
 
 </script>
