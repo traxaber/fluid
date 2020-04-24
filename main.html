@@ -8,15 +8,6 @@
 <center><h1 style="font-family:'Roboto'; font-size:500%"></h1></center>
 
 <body style="background:#222">
-	<div id="wpmwrapper">
-		<span id="wpm" style="float:left">0</span>&nbspWPM
-	</div>
-
-	<div id="promptwrapper">
-		<div id="prompt" style="float:left">The quick brown fox jumped over the lazy dog.</div>
-	</div>
-
-	<br>
 
 	<div id="buttonwrapper">
 		<button class="btn btn-secondary" onclick="topen(100)">top 100</button>
@@ -24,7 +15,17 @@
 		<button class="btn btn-secondary" onclick="newPrompt()">excerpt</button>
 	</div>
 
-	<br><br><br><br>
+	<br>
+
+	<div id="promptwrapper">
+		<div id="prompt"><span>The </span><span>quick </span><span>brown </span><span>fox </span><span>jumps </span><span>over </span><span>the </span><span>lazy </span><span>dog. </span></div>
+	</div>
+
+	<div id="wpmwrapper">
+		<span id="wpm" style="float:left">0</span>&nbspWPM
+	</div>
+
+	<br><br>
 
 	<div style="text-align:center">
 		<input type="text" id="typeinput">
@@ -39,7 +40,7 @@
 
 var startTime = 0;
 
-var promptArr = document.getElementById('prompt').innerHTML.split(" ");
+var promptArr = ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.'];
 var promptDiv = document.getElementById('prompt');
 var wpmSpan = document.getElementById('wpm');
 
@@ -65,12 +66,15 @@ input.addEventListener('input', function() {
     var lastChar = String.fromCharCode(this.value.charCodeAt(start - 1));
 
     // clears input box if correct word is typed
-    if((lastChar === ' ' && this.value === promptArr[curr]+" ") || (curr === promptArr.length-1 && this.value === promptArr[curr])) {
+    if((lastChar === ' ' && this.value == promptArr[curr]+" ") || (curr === promptArr.length-1 && this.value === promptArr[curr])) {
         // append to completed string
         completed += this.value;
 
         // update prompt
-    	promptDiv.innerHTML = promptDiv.innerHTML.substring(promptArr[curr].length+1);
+		promptDiv.childNodes[curr].style.color = "blue";
+		if (curr != promptArr.length-1){
+			promptDiv.childNodes[curr+1].style.color = "purple";
+		}
 
 		// calculate and display wpm
     	wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
@@ -90,7 +94,6 @@ input.addEventListener('input', function() {
     // end prompt if last word is typed (space not necessary)
     if (curr === promptArr.length){
     	document.getElementById('promptwrapper').style.background = "#7d7";
-    	promptDiv.innerHTML = "you're done!";
     }
 
 });
@@ -98,29 +101,33 @@ input.addEventListener('input', function() {
 // sets new prompt, taken from prompts list, and resets variables
 function newPrompt() {
 	var rand = Math.floor(Math.random() * prompts.length);
-	promptDiv.innerHTML = prompts[rand];
+	promptArr = prompts[rand].split(' ');
+	promptDiv.innerHTML = "";
+	for (var i=0; i<promptArr.length; i++){
+		promptDiv.innerHTML += "<span>" + promptArr[i] + " </span>";
+	}
 	curr = 0;
 	first = true;
-	promptArr = document.getElementById('prompt').innerHTML.split(" ");
     document.getElementById('promptwrapper').style.background = "#fff";
 	completed = "";
 }
 
-// sets new prompt, taken from top n words in english varible
+// sets new prompt, taken from top n words in english variable
 function topen(n) {
 	var bank = eval("top" + n.toString());
 
-	var finPrompt = "";
+	promptDiv.innerHTML = "";
+	promptArr = [];
 	for (i=0;i<49;i++){
-		finPrompt+= bank[Math.floor(Math.random() * bank.length)]+" ";
+		promptArr.push(bank[Math.floor(Math.random() * bank.length)]);
 	}
-	finPrompt+= bank[Math.floor(Math.random() * bank.length)];
+	promptArr.push(bank[Math.floor(Math.random() * bank.length)]);
 
-
-	promptDiv.innerHTML = finPrompt;
+	for (var i=0; i<promptArr.length; i++){
+		promptDiv.innerHTML += "<span>" + promptArr[i] + " </span>";
+	}
 	curr = 0;
 	first = true;
-	promptArr = promptDiv.innerHTML.split(" ");
     document.getElementById('promptwrapper').style.background = "#fff";
 	completed = "";
 }

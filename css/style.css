@@ -1,5 +1,5 @@
 div{
-	font-family: 'Inconsolata', monospace;
+	font-family: monospace, bold;
 }
 
 #wpmwrapper{
@@ -12,15 +12,16 @@ div{
 }
 
 #promptwrapper{
-	text-align:left; 
 	margin: 0 auto; 
 	width:50%; 
 	overflow:hidden; 
 	font-size:30px;
-	white-space:nowrap; 
 	background: #fff;
 	padding: 10px;
 	border-radius: 5px;
+	text-align: justify;
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 #buttonwrapper{
@@ -31,6 +32,7 @@ div{
 }
 
 #typeinput{
+	width:50%;
 	font-size:40px;
 	font-family:'Roboto';
 	padding: 10px;
