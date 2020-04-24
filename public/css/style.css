@@ -1,0 +1,83 @@
+:root {
+	--dark-1: #222;
+	--dark-2: #333;
+	--dark-3: #444;
+	--white-1: #fff;
+	--red-1: #8b0000;
+	--red-2: #a50000;
+	--blue-1: #002c6e;
+	--blue-2: #0048b5;
+	--blue-3: #70a9ff;
+	--green-1: #005e1f;
+	--green-2: #008a2d;
+	--green-3: #41b567;
+
+	--base-1: var(--dark-1);
+	--base-2: var(--dark-2);
+	--base-2: var(--dark-3);
+	--text: var(--white-1);
+	--wrong-word: var(--red-1);
+	--completed-word: var(--green-3);
+	--current-word: var(--blue-3);
+}
+
+* {
+	font-family: monospace, bold;
+}
+
+#mainbody {
+	background: var(--base-1);
+}
+
+#wpmwrapper{
+	text-align:left; 
+	margin: 0 auto; 
+	font-size:30px;
+	width: 800px;
+	max-width: 80%; 
+	padding: 10px;
+	color: white;
+}
+
+#promptwrapper{
+	margin: 0 auto; 
+	width: 800px; 
+	max-width: 80%;
+	font-size:30px;
+	border-radius: 5px;
+	text-align: justify;
+	background: var(--base-2);
+	color: var(--text);
+}
+
+#typeinput{
+	margin: 0 auto; 
+	width: 800px;
+	max-width: 80%;
+	font-size: 30px;
+	border-radius: 5px;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border: var(--base-2);
+	background: var(--base-2);
+	color: var(--text);
+}
+
+#buttonwrapper{
+	text-align:left; 
+	margin: 0 auto; 
+	width: 800px;
+	max-width: 80%;
+	font-size:30px;
+}
+
+button {
+    background-color: var(--base-2);
+	border-color: var(--base-2);
+	border: 0px;
+    color: var(--text);
+	border-radius: .3em;
+    font-size: .7em;
+    font-weight: bolder;
+}

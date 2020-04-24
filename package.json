@@ -1,0 +1,23 @@
+{
+  "name": "fluid",
+  "version": "1.0.0",
+  "description": "Typing game aimed to help increase fluidity in typing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davidang6/fluid.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/davidang6/fluid/issues"
+  },
+  "homepage": "https://github.com/davidang6/fluid#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

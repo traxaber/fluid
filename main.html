@@ -1,24 +1,22 @@
 <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
 
 <br><br><br>
 <center><h1 style="font-family:'Roboto'; font-size:500%"></h1></center>
 
-<body style="background:#222">
+<body id="mainbody">
 
 	<div id="buttonwrapper">
-		<button class="btn btn-secondary" onclick="topen(100)">top 100</button>
-		<button class="btn btn-secondary" onclick="topen(1000)">top 1000</button>
-		<button class="btn btn-secondary" onclick="newPrompt()">excerpt</button>
+		<button onclick="topen(100)">top 100</button>
+		<button onclick="topen(1000)">top 1000</button>
+		<button onclick="newPrompt()">excerpt</button>
 	</div>
 
 	<br>
 
 	<div id="promptwrapper">
-		<div id="prompt"><span>The </span><span>quick </span><span>brown </span><span>fox </span><span>jumps </span><span>over </span><span>the </span><span>lazy </span><span>dog. </span></div>
+		<div id="prompt" style="padding:15px; padding-left: 20px; padding-right: 20px"><span>The </span><span>quick </span><span>brown </span><span>fox </span><span>jumps </span><span>over </span><span>the </span><span>lazy </span><span>dog. </span></div>
 	</div>
 
 	<div id="wpmwrapper">
@@ -28,7 +26,7 @@
 	<br><br>
 
 	<div style="text-align:center">
-		<input type="text" id="typeinput">
+		<div><input type="text" id="typeinput"></div>
 	</div>
 
 </body>
@@ -37,6 +35,8 @@
 <script src="js/topPrompts.js"></script>
 
 <script>
+
+var root = document.documentElement;
 
 var startTime = 0;
 
@@ -48,6 +48,7 @@ var completed = "";
 
 var input = document.getElementById('typeinput');
 var curr = 0;
+var done = false;
 var first = true;
 
 // listens to keystrokes in input box
@@ -70,10 +71,10 @@ input.addEventListener('input', function() {
         // append to completed string
         completed += this.value;
 
-        // update prompt
-		promptDiv.childNodes[curr].style.color = "blue";
+        // update prompt word color indicators
+		promptDiv.childNodes[curr].style.color = getComputedStyle(root).getPropertyValue("--completed-word");
 		if (curr != promptArr.length-1){
-			promptDiv.childNodes[curr+1].style.color = "purple";
+			promptDiv.childNodes[curr+1].style.color = getComputedStyle(root).getPropertyValue("--current-word");
 		}
 
 		// calculate and display wpm
@@ -86,14 +87,15 @@ input.addEventListener('input', function() {
 
     // set background of input box to red if incorrect character is typed
     if (this.value.length > 0 && this.value !== promptArr[curr].substring(0, this.value.length)){
-    	this.style.background = "#d77";
+    	this.style.background = getComputedStyle(root).getPropertyValue("--wrong-word");
     } else {
-    	this.style.background = "#fff";
+    	this.style.background = getComputedStyle(root).getPropertyValue("--base-2");
     }
 
     // end prompt if last word is typed (space not necessary)
-    if (curr === promptArr.length){
-    	document.getElementById('promptwrapper').style.background = "#7d7";
+    if (curr === promptArr.length && !done){
+		promptDiv.innerHTML += "✔️";
+		done = true;
     }
 
 });
@@ -108,7 +110,9 @@ function newPrompt() {
 	}
 	curr = 0;
 	first = true;
-    document.getElementById('promptwrapper').style.background = "#fff";
+	done = false;
+	promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
 	completed = "";
 }
 
@@ -128,7 +132,9 @@ function topen(n) {
 	}
 	curr = 0;
 	first = true;
-    document.getElementById('promptwrapper').style.background = "#fff";
+	done = false;
+    promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
 	completed = "";
 }
 
