@@ -79,5 +79,6 @@ button {
     color: var(--text);
 	border-radius: .3em;
     font-size: .7em;
-    font-weight: bolder;
+	font-weight: bolder;
+	padding: 10px;
 }
