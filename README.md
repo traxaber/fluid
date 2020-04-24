@@ -2,4 +2,4 @@
 Typing game aimed to help increase fluidity in typing
 
 ## instructions
-git clone, and then open main.html in browser
+visit https://angdav-fluid.herokuapp.com/
