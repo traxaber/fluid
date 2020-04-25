@@ -167,8 +167,8 @@ input.addEventListener('input', function(event) {
 
     // end prompt if last word is typed (space not necessary)
     if (curr === promptArr.length && !done){
-		wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
-		accSpan.innerHTML = ((accRight / (accRight + accWrong))*100).toFixed(2) + "%";
+		wpmSpan.innerHTML = Math.round((completed.length/5)/((Date.now()-startTime)/60000) * 100) / 100;
+		accSpan.innerHTML = Math.round(((accRight / (accRight + accWrong))*100) * 100) / 100 + "%";
 		promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--complete-bg");
 		done = true;
 		if (perfect) {
