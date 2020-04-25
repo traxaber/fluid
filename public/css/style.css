@@ -2,7 +2,11 @@
 	--dark-1: #222;
 	--dark-2: #333;
 	--dark-3: #444;
+	--light-1: #ddd;
+	--light-2: #eee;
+	--light-3: #fff;
 	--white-1: #fff;
+	--black-1: #000;
 	--red-1: #8b0000;
 	--red-2: #a50000;
 	--blue-1: #002c6e;
@@ -14,7 +18,7 @@
 
 	--base-1: var(--dark-1);
 	--base-2: var(--dark-2);
-	--base-2: var(--dark-3);
+	--base-3: var(--dark-3);
 	--text: var(--white-1);
 	--wrong-word: var(--red-1);
 	--completed-word: var(--green-3);
@@ -26,7 +30,7 @@
 }
 
 #title {
-	color: white;
+	color: var(--text);
 	text-align: center;
 }
 
@@ -41,7 +45,7 @@
 	width: 800px;
 	max-width: 80%; 
 	padding: 10px;
-	color: white;
+	color: var(--text);
 }
 
 #promptwrapper{
@@ -92,6 +96,11 @@
 	max-width: 15%;
 }
 
+#menubutton {
+	font-size: 30px;
+	margin: 20px;
+}
+
 button {
     background-color: var(--base-2);
 	border-color: var(--base-2);
@@ -101,4 +110,90 @@ button {
     font-size: .7em;
 	font-weight: bolder;
 	padding: 10px;
+}
+
+#popup {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 500px;
+	max-width: 22%;
+	min-width: 300px;
+	height: 600px;
+	margin-top: 100px;
+	margin-left: 25px;
+	background-color: var(--base-3);
+	border: 10px var(--base-3);
+	border-radius: 10px;
+	/* animation: fadein 1s; */
+}
+
+table {
+	color: var(--text);
+	font-size: 1.2em;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+/* @keyframes fadein {
+	0% {opacity: 0}
+	100% {opacity: 1}
+} */
+
+td {
+	width: 50%;
+	padding: 10px;
+}
+
+tr, tbody {
+	width: 100%;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 34px;
+}
+
+.switch input { 
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 34px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 4px;
+	background-color: white;
+	-webkit-transition: .4s;
+	transition: .4s;
+	border-radius: 34px;
+}
+
+input:checked + .slider {
+	background-color: var(--blue-3);
+}
+
+input:checked + .slider:before {
+	-webkit-transform: translateX(26px);
+	-ms-transform: translateX(26px);
+	transform: translateX(26px);
 }

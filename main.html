@@ -1,11 +1,14 @@
-<link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Nunito&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
+<button id="menubutton" onclick="toggleMenu()">hamborger</button>
 <br>
-<h1 id="title" style="font-family:'Roboto'; font-size:500%">fluid</h1>
+<h1 id="title" style="font-family:'Nunito'; font-size:500%">FLUID</h1>
 
 <body id="mainbody">
+	
 
 	<div id="buttonwrapper">
 		<button onclick="topen(100)">top 100</button>
@@ -30,6 +33,32 @@
 		<button id="redobutton" onclick="redo()">redo</button>
 	</div>
 
+	<!-- <div id="popupbg" style="display: none"> -->
+	<div id="popup" style="display: none">
+		<br>
+		<table style="width: 100%">
+			<tr>
+				<td>Dark Theme</td>
+				<td>
+					<label class="switch" style="float: right">
+						<input id="darkMode" type="checkbox">
+						<span class="slider"></span>
+					</label>
+				</td>
+			</tr>
+			<tr>
+				<td>Show Live WPM</td>
+				<td>
+					<label class="switch" style="float: right">
+						<input id="liveWPM" type="checkbox">
+						<span class="slider"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!-- </div> -->
+
 </body>
 
 <script src="js/prompts.js"></script>
@@ -41,9 +70,13 @@ var root = document.documentElement;
 
 var startTime = 0;
 
+var popup = document.getElementById("popup");
+
 var promptArr = ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.'];
 var promptDiv = document.getElementById('prompt');
 var wpmSpan = document.getElementById('wpm');
+var liveWPM = document.getElementById('liveWPM');
+var darkMode = document.getElementById('darkMode');
 
 var completed = "";
 
@@ -52,9 +85,30 @@ var curr = 0;
 var done = false;
 var first = true;
 
-var last = ""; // last chosen prompt mode
+var last = "top100"; // last chosen prompt mode
+
+
+var live = false;
+var dark = true;
+if (typeof(Storage) !== "undefined"){
+	live = localStorage.getItem("live");
+	dark = localStorage.getItem("dark");
+	if(live == "true"){
+		liveWPM.checked = true;
+	} else {
+		liveWPM.checked = false;
+	}
+	if(dark == "true"){
+		darkMode.checked = true;
+	} else {
+		darkMode.checked = false;
+	}
+	setTheme();
+}
 
 input.focus(); // set cursor focus to input box
+
+topen(100);
 
 // listens to keystrokes in input box
 input.addEventListener('input', function() {
@@ -83,7 +137,9 @@ input.addEventListener('input', function() {
 		}
 
 		// calculate and display wpm
-    	wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
+		if (live == "true"){
+    		wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
+		}
         
         // clear the board and increment promptArr index
         this.value = "";
@@ -99,6 +155,7 @@ input.addEventListener('input', function() {
 
     // end prompt if last word is typed (space not necessary)
     if (curr === promptArr.length && !done){
+    	wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
 		promptDiv.innerHTML += "✔️";
 		done = true;
     }
@@ -147,13 +204,67 @@ function reset(){
 	done = false;
     promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
+	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+	wpmSpan.innerHTML = "?";
 	completed = "";
 	input.value = "";
 	input.focus();
 }
 
-function finishAnimation(){
-	
+function toggleMenu(){
+	if (popup.style.display === "none") {
+	  	popup.style.display = "block";
+  	} else {
+	  	popup.style.display = "none";
+  	}
+}
+
+liveWPM.addEventListener('change', function() {
+	if(this.checked){
+		live = "true";
+		if (typeof(Storage) !== "undefined"){
+			localStorage.setItem("live", "true");
+		}
+	} else {
+		live = "false";
+		if (typeof(Storage) !== "undefined"){
+			localStorage.setItem("live", "false");
+		}
+	}
+});
+
+darkMode.addEventListener('change', function() {
+	if(this.checked){
+		dark = "true";
+		if (typeof(Storage) !== "undefined"){
+			localStorage.setItem("dark", "true");
+		}
+	} else {
+		dark = "false";
+		if (typeof(Storage) !== "undefined"){
+			localStorage.setItem("dark", "false");
+		}
+	}
+	setTheme();
+});
+
+function setTheme(){
+	if(dark == "true"){
+		darkMode.checked = true;
+		root.style.setProperty("--base-1", getComputedStyle(root).getPropertyValue("--dark-1"));
+		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--dark-2"));
+		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--dark-3"));
+		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--white-1"));
+	} else {
+		darkMode.checked = false;
+		root.style.setProperty("--base-1", getComputedStyle(root).getPropertyValue("--light-1"));
+		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--light-2"));
+		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--light-3"));
+		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--black-1"));
+	}
+    promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
+	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 }
 
 </script>
