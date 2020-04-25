@@ -15,6 +15,8 @@
 	--green-1: #005e1f;
 	--green-2: #008a2d;
 	--green-3: #41b567;
+	--gold: rgb(255, 236, 113);
+	--purple: rgb(134, 62, 134);
 	--light-green-tint: rgba(179, 255, 179, 0.7);
 	--dark-green-tint: rgba(1, 50, 32, 0.7);
 
@@ -25,7 +27,12 @@
 	--wrong-word: var(--red-1);
 	--completed-word: var(--green-3);
 	--current-word: var(--blue-3);
-	--complete-bg: var(--dark-green-tint)
+	--complete-bg: var(--dark-green-tint);
+	--perfect: var(--gold);
+}
+
+.perfect {
+	color: var(--perfect);
 }
 
 input:focus,
