@@ -164,6 +164,23 @@ tr, tbody {
 	width: 100%;
 }
 
+#github {
+	position: fixed;
+	bottom: 30px;
+	left: 45%;
+	width: 10%;
+	height: 30px;
+	background: var(--light-1);
+	border-radius: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#github:hover {
+    background-color: var(--blue-3);
+	box-shadow: 3px 3px var(--dark-3);
+}
+
 .switch {
 	position: relative;
 	display: inline-block;
