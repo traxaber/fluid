@@ -15,6 +15,8 @@
 	--green-1: #005e1f;
 	--green-2: #008a2d;
 	--green-3: #41b567;
+	--light-green-tint: rgba(179, 255, 179, 0.7);
+	--dark-green-tint: rgba(1, 50, 32, 0.7);
 
 	--base-1: var(--dark-1);
 	--base-2: var(--dark-2);
@@ -23,6 +25,7 @@
 	--wrong-word: var(--red-1);
 	--completed-word: var(--green-3);
 	--current-word: var(--blue-3);
+	--complete-bg: var(--dark-green-tint)
 }
 
 input:focus,

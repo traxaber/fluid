@@ -70,7 +70,6 @@ var startTime = 0;
 
 var popup = document.getElementById("popup");
 
-var promptArr = ['The', 'quick', 'brown', 'fox', 'jumps', 'over', 'the', 'lazy', 'dog.'];
 var promptDiv = document.getElementById('prompt');
 var wpmSpan = document.getElementById('wpm');
 var liveWPM = document.getElementById('liveWPM');
@@ -106,7 +105,7 @@ if (typeof(Storage) !== "undefined"){
 
 input.focus(); // set cursor focus to input box
 
-topen(100);
+topen(100); // default prompt is top 100
 
 // listens to keystrokes in input box
 input.addEventListener('input', function() {
@@ -154,10 +153,11 @@ input.addEventListener('input', function() {
     // end prompt if last word is typed (space not necessary)
     if (curr === promptArr.length && !done){
     	wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
-		promptDiv.innerHTML += "✔️";
+		promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--complete-bg");
 		done = true;
 	}
 	
+	// toggles theme with every keystroke with epilepsyMode on
 	if(epilepsy == "true"){
 		if (dark == "true"){
 			dark = "false";
@@ -224,6 +224,7 @@ function reset(){
 	input.focus();
 }
 
+// open and close hamburger menu
 function toggleMenu(){
 	if (popup.style.display === "none") {
 	  	popup.style.display = "block";
@@ -232,6 +233,7 @@ function toggleMenu(){
   	}
 }
 
+// live WPM toggle listener
 liveWPM.addEventListener('change', function() {
 	if(this.checked){
 		live = "true";
@@ -246,6 +248,7 @@ liveWPM.addEventListener('change', function() {
 	}
 });
 
+// dark mode toggle listener
 darkMode.addEventListener('change', function() {
 	if(this.checked){
 		dark = "true";
@@ -261,6 +264,7 @@ darkMode.addEventListener('change', function() {
 	setTheme();
 });
 
+// set theme
 function setTheme(){
 	if(dark == "true"){
 		darkMode.checked = true;
@@ -268,12 +272,14 @@ function setTheme(){
 		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--dark-2"));
 		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--dark-3"));
 		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--white-1"));
+		root.style.setProperty("--complete-bg", getComputedStyle(root).getPropertyValue("--dark-green-tint"));
 	} else {
 		darkMode.checked = false;
 		root.style.setProperty("--base-1", getComputedStyle(root).getPropertyValue("--light-1"));
 		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--light-2"));
 		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--light-3"));
 		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--black-1"));
+		root.style.setProperty("--complete-bg", getComputedStyle(root).getPropertyValue("--light-green-tint"));
 	}
 	promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
