@@ -25,6 +25,13 @@
 	--current-word: var(--blue-3);
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+	outline-color: var(--base-2);
+}
+
 * {
 	font-family: "Inconsolata", bold;
 }
@@ -112,6 +119,11 @@ button {
 	padding: 10px;
 }
 
+button:hover {
+    background-color: var(--blue-3);
+	box-shadow: 3px 3px var(--dark-3);
+}
+
 #popup {
 	position: fixed;
 	top: 0;
@@ -135,10 +147,10 @@ table {
 	padding-right: 10px;
 }
 
-/* @keyframes fadein {
+@keyframes fadein {
 	0% {opacity: 0}
 	100% {opacity: 1}
-} */
+}
 
 td {
 	width: 50%;
