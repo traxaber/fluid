@@ -54,15 +54,6 @@
 					</label>
 				</td>
 			</tr>
-			<tr>
-				<td>Epilepsy Mode</td>
-				<td>
-					<label class="switch" style="float: right">
-						<input id="epilepsyMode" type="checkbox">
-						<span class="slider"></span>
-					</label>
-				</td>
-			</tr>
 		</table>
 	</div>
 
@@ -84,7 +75,6 @@ var promptDiv = document.getElementById('prompt');
 var wpmSpan = document.getElementById('wpm');
 var liveWPM = document.getElementById('liveWPM');
 var darkMode = document.getElementById('darkMode');
-var epilepsyMode = document.getElementById('epilepsyMode');
 
 var completed = "";
 
@@ -97,11 +87,10 @@ var last = "top100"; // last chosen prompt mode
 
 var live = false;
 var dark = true;
-var epilepsy = true;
+var epilepsy = false;
 if (typeof(Storage) !== "undefined"){
 	live = localStorage.getItem("live");
 	dark = localStorage.getItem("dark");
-	epilepsy = localStorage.getItem("epilepsy");
 	if(live == "true"){
 		liveWPM.checked = true;
 	} else {
@@ -111,11 +100,6 @@ if (typeof(Storage) !== "undefined"){
 		darkMode.checked = true;
 	} else {
 		darkMode.checked = false;
-	}
-	if(epilepsy == "true"){
-		epilepsyMode.checked = true;
-	} else {
-		epilepsyMode.checked = false;
 	}
 	setTheme();
 }
@@ -277,20 +261,6 @@ darkMode.addEventListener('change', function() {
 	setTheme();
 });
 
-epilepsyMode.addEventListener('change', function() {
-	if(this.checked){
-		epilepsy = "true";
-		if (typeof(Storage) !== "undefined"){
-			localStorage.setItem("epilepsy", "true");
-		}
-	} else {
-		epilepsy = "false";
-		if (typeof(Storage) !== "undefined"){
-			localStorage.setItem("epilepsy", "false");
-		}
-	}
-});
-
 function setTheme(){
 	if(dark == "true"){
 		darkMode.checked = true;
@@ -313,3 +283,5 @@ function setTheme(){
 }
 
 </script>
+
+<script src="js/konami.js"></script>
