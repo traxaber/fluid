@@ -71,7 +71,6 @@ function setTheme(){
 	promptDiv.parentElement.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
 	input.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
 	if(!epilepsy){
-		console.log(promptDiv.childNodes[0])
 		promptDiv.childNodes[0].style.color = getComputedStyle(document.body).getPropertyValue("--current-word");
 	}
 }
