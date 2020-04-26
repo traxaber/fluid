@@ -42,7 +42,7 @@ function reset(){
 	done = false;
 	perfect = true;
 	accRight = 0, accWrong = 0;
-    promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+		promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
 	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	wpmSpan.innerHTML = "?";
@@ -55,31 +55,19 @@ function reset(){
 // open and close hamburger menu
 function toggleMenu(){
 	if (popup.style.display === "none") {
-	  	popup.style.display = "block";
-  	} else {
-	  	popup.style.display = "none";
-  	}
+			popup.style.display = "block";
+		} else {
+			popup.style.display = "none";
+		}
 }
 
 // set theme
 function setTheme(){
-	if(dark == "true"){
-		darkMode.checked = true;
-		root.style.setProperty("--base-1", getComputedStyle(root).getPropertyValue("--dark-1"));
-		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--dark-2"));
-		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--dark-3"));
-		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--white-1"));
-		root.style.setProperty("--complete-bg", getComputedStyle(root).getPropertyValue("--dark-green-tint"));
-		root.style.setProperty("--perfect", getComputedStyle(root).getPropertyValue("--gold"));
-	} else {
-		darkMode.checked = false;
-		root.style.setProperty("--base-1", getComputedStyle(root).getPropertyValue("--light-1"));
-		root.style.setProperty("--base-2", getComputedStyle(root).getPropertyValue("--light-2"));
-		root.style.setProperty("--base-3", getComputedStyle(root).getPropertyValue("--light-3"));
-		root.style.setProperty("--text", getComputedStyle(root).getPropertyValue("--black-1"));
-		root.style.setProperty("--complete-bg", getComputedStyle(root).getPropertyValue("--light-green-tint"));
-		root.style.setProperty("--perfect", getComputedStyle(root).getPropertyValue("--purple"));
-	}
+	const theme = dark === "true" ? "dark" : "light";
+	darkMode.checked = dark === "true";
+
+	document.body.setAttribute("data-theme", theme);
+
 	promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
 	if(!epilepsy){
