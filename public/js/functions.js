@@ -42,9 +42,9 @@ function reset(){
 	done = false;
 	perfect = true;
 	accRight = 0, accWrong = 0;
-		promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
-	promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
-	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+		promptDiv.parentElement.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
+	promptDiv.childNodes[0].style.color = getComputedStyle(document.body).getPropertyValue("--current-word");
+	input.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
 	wpmSpan.innerHTML = "?";
 	accSpan.innerHTML = "?";
 	completed = "";
@@ -68,10 +68,11 @@ function setTheme(){
 
 	document.body.setAttribute("data-theme", theme);
 
-	promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--base-2");
-	input.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+	promptDiv.parentElement.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
+	input.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
 	if(!epilepsy){
-		promptDiv.childNodes[0].style.color = getComputedStyle(root).getPropertyValue("--current-word");
+		console.log(promptDiv.childNodes[0])
+		promptDiv.childNodes[0].style.color = getComputedStyle(document.body).getPropertyValue("--current-word");
 	}
 }
 

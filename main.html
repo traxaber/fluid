@@ -99,6 +99,9 @@ var last = "top100"; // last chosen prompt mode
 var live = false;
 var dark = true;
 var epilepsy = false;
+
+topen(100); // default prompt is top 100
+
 if (typeof(Storage) !== "undefined"){
 	live = localStorage.getItem("live");
 	dark = localStorage.getItem("dark");
@@ -116,8 +119,6 @@ if (typeof(Storage) !== "undefined"){
 }
 
 input.focus(); // set cursor focus to input box
-
-topen(100); // default prompt is top 100
 
 // listens to keystrokes in input box
 input.addEventListener('input', function(event) {
@@ -140,10 +141,9 @@ input.addEventListener('input', function(event) {
         completed += this.value;
 
 		// update prompt word color indicators
-		console.log(getComputedStyle(root).getPropertyValue("--completed-word"))
-		promptDiv.childNodes[curr].style.color = getComputedStyle(root).getPropertyValue("--completed-word");
+		promptDiv.childNodes[curr].style.color = getComputedStyle(document.body).getPropertyValue("--completed-word");
 		if (curr != promptArr.length-1){
-			promptDiv.childNodes[curr+1].style.color = getComputedStyle(root).getPropertyValue("--current-word");
+			promptDiv.childNodes[curr+1].style.color = getComputedStyle(document.body).getPropertyValue("--current-word");
 		}
 
 		// calculate and display wpm
@@ -158,12 +158,12 @@ input.addEventListener('input', function(event) {
 
     // set background of input box to red if incorrect character is typed
     if (this.value.length > 0 && this.value !== promptArr[curr].substring(0, this.value.length)){
-		this.style.background = getComputedStyle(root).getPropertyValue("--wrong-word");
+		this.style.background = getComputedStyle(document.body).getPropertyValue("--wrong-word");
 		perfect = false;
 		if(event.data != null)
 			accWrong++;
     } else {
-		this.style.background = getComputedStyle(root).getPropertyValue("--base-2");
+		this.style.background = getComputedStyle(document.body).getPropertyValue("--base-2");
 		accRight++;
     }
 
@@ -171,7 +171,7 @@ input.addEventListener('input', function(event) {
     if (curr === promptArr.length && !done){
 		wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
 		accSpan.innerHTML = Math.round(((accRight / (accRight + accWrong))*100) * 100) / 100 + "%";
-		promptDiv.parentElement.style.background = getComputedStyle(root).getPropertyValue("--complete-bg");
+		promptDiv.parentElement.style.background = getComputedStyle(document.body).getPropertyValue("--complete-bg");
 		done = true;
 		if (perfect) {
 			promptDiv.innerHTML += "<span class='perfect'>perfect run</span>";
