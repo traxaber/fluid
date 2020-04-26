@@ -49,6 +49,13 @@ button:focus {
 #title {
 	color: var(--text);
 	text-align: center;
+	font-family:'Nunito';
+	font-size:300%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	margin-top: 24px;
+	margin-left: 95px;
 }
 
 #mainbody {
