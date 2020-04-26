@@ -20,9 +20,6 @@
 	--light-green-tint: rgba(179, 255, 179, 0.7);
 	--dark-green-tint: rgba(1, 50, 32, 0.7);
 
-	--wrong-word: var(--red-1);
-	--completed-word: var(--green-3);
-	--current-word: var(--blue-3);
 }
 
 [data-theme="light"] {
@@ -32,6 +29,9 @@
 	--text: var(--black-1);
 	--complete-bg: var(--light-green-tint);
 	--perfect: var(--purple);
+	--wrong-word: var(--red-1);
+	--completed-word: var(--green-3);
+	--current-word: var(--blue-3);
 }
 
 [data-theme="dark"] {
@@ -41,6 +41,9 @@
 	--text: var(--white-1);
 	--complete-bg: var(--dark-green-tint);
 	--perfect: var(--gold);
+	--wrong-word: var(--red-1);
+	--completed-word: var(--green-3);
+	--current-word: var(--blue-3);
 }
 
 .perfect {
