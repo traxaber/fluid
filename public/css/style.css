@@ -19,7 +19,15 @@
 	--purple: rgb(134, 62, 134);
 	--light-green-tint: rgba(179, 255, 179, 0.7);
 	--dark-green-tint: rgba(1, 50, 32, 0.7);
-
+	--base-1: var(--dark-1);
+	--base-2: var(--dark-2);
+	--base-3: var(--dark-3);
+	--text: var(--white-1);
+	--complete-bg: var(--dark-green-tint);
+	--perfect: var(--gold);
+	--wrong-word: var(--red-1);
+	--completed-word: var(--green-3);
+	--current-word: var(--blue-3);
 }
 
 [data-theme="light"] {

@@ -139,7 +139,8 @@ input.addEventListener('input', function(event) {
         // append to completed string
         completed += this.value;
 
-        // update prompt word color indicators
+		// update prompt word color indicators
+		console.log(getComputedStyle(root).getPropertyValue("--completed-word"))
 		promptDiv.childNodes[curr].style.color = getComputedStyle(root).getPropertyValue("--completed-word");
 		if (curr != promptArr.length-1){
 			promptDiv.childNodes[curr+1].style.color = getComputedStyle(root).getPropertyValue("--current-word");
