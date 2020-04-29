@@ -10,7 +10,7 @@
 
 <button id="menubutton" onclick="toggleMenu()">☰</button>
 
-<h1 id="title">FLUID</h1>
+<!-- <h1 id="title">FLUID</h1> -->
 <br><br><br>
 
 <body id="mainbody" data-theme="dark">
@@ -44,6 +44,9 @@
 	<div id="graphwrapper" style="text-align:center">
 	
 	</div>
+
+	<br><br><br><br><br><br>
+	<br><br><br><br><br><br>
 
 	<div id="popup" style="display: none">
 		<br>
@@ -163,7 +166,7 @@ input.addEventListener('input', function(event) {
 		}
 
 		// store wpm for individual word in array
-		wpmArr.push(parseInt((((promptArr[curr].length)/5)/((Date.now()-localTime)/60000)).toFixed(2)));
+		wpmArr.push(parseInt((((promptArr[curr].length + 1)/5)/((Date.now()-localTime)/60000)).toFixed(2)));
 		localTime = Date.now();
         
         // clear the board and increment promptArr index
@@ -191,6 +194,7 @@ input.addEventListener('input', function(event) {
 		if (perfect) {
 			promptDiv.innerHTML += "<span class='perfect'>perfect run</span>";
 		}
+		console.log(wpmArr)
 		showChart();
 	}
 	

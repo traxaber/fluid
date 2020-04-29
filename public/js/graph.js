@@ -20,7 +20,7 @@ function drawChart() {
     var options = {
 		backgroundColor: '',
 		bars: 'vertical',
-		height: 400,
+		height: 300,
 		legend: {position: 'none'},
 		fontName: 'Inconsolata',
 		colors: ['#70a9ff'],
