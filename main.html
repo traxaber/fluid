@@ -27,7 +27,7 @@
 		<div id="prompt" style="padding:15px; padding-left: 20px; padding-right: 20px"><span>The </span><span>quick </span><span>brown </span><span>fox </span><span>jumps </span><span>over </span><span>the </span><span>lazy </span><span>dog. </span></div>
 	</div>
 
-	<div style="text-align: right" id="wpmwrapper">
+	<div id="wpmwrapper" style="text-align: right">
 		<div style="display: inline-block">ACC:&nbsp<span id="acc">?</span>&nbsp|</div>
 		<div style="display: inline-block"></div><span id="wpm">0</span>&nbspWPM</div>
 	</div>
@@ -37,6 +37,12 @@
 	<div id="inputwrapper" style="text-align:center">
 		<div><input type="text" id="typeinput" autocorrect="off" autocapitalize="none" placeholder="Type Here" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Type Here'"></div>
 		<button id="redobutton" onclick="redo()">redo</button>
+	</div>
+
+	<br><br><br><br><br><br>
+
+	<div id="graphwrapper" style="text-align:center">
+	
 	</div>
 
 	<div id="popup" style="display: none">
@@ -76,6 +82,9 @@
 var root = document.documentElement;
 
 var startTime = 0;
+var localTime = 0;
+
+var wpmArr = [];
 
 var popup = document.getElementById("popup");
 
@@ -84,6 +93,7 @@ var wpmSpan = document.getElementById('wpm');
 var accSpan = document.getElementById('acc');
 var liveWPM = document.getElementById('liveWPM');
 var darkMode = document.getElementById('darkMode');
+var graph = document.getElementById('graphwrapper');
 
 var completed = "";
 
@@ -126,6 +136,7 @@ input.addEventListener('input', function(event) {
 	// set starting time to measure wpm
 	if (curr === 0 && first){
 		startTime = Date.now();
+		localTime = Date.now();
 		first = false;
 	}
 
@@ -150,6 +161,10 @@ input.addEventListener('input', function(event) {
 		if (live == "true"){
     		wpmSpan.innerHTML = ((completed.length/5)/((Date.now()-startTime)/60000)).toFixed(2);
 		}
+
+		// store wpm for individual word in array
+		wpmArr.push(parseInt((((promptArr[curr].length+1)/5)/((Date.now()-localTime)/60000)).toFixed(2)));
+		localTime = Date.now();
         
         // clear the board and increment promptArr index
         this.value = "";
@@ -176,6 +191,7 @@ input.addEventListener('input', function(event) {
 		if (perfect) {
 			promptDiv.innerHTML += "<span class='perfect'>perfect run</span>";
 		}
+		showChart();
 	}
 	
 	// toggles theme with every keystroke with epilepsyMode on
@@ -226,6 +242,11 @@ darkMode.addEventListener('change', function() {
 	}
 	setTheme();
 });
+
 </script>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="js/graph.js"></script>
 
 <script src="js/konami.js"></script>

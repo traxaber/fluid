@@ -127,6 +127,14 @@ button:focus {
 	font-size:30px;
 }
 
+#graphwrapper {
+	display: block;
+	width: 800px;
+	margin: 0 auto;
+	max-width: 80%;
+	font-size:30px;
+}
+
 #redobutton {
 	font-size: 30px;
 	float: right;

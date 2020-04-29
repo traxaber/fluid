@@ -37,6 +37,9 @@ function reset(){
 		promptDiv.innerHTML += "<span>" + promptArr[i] + " </span>";
 	}
 
+	graph.style.display = "none";
+	wpmArr = [];
+
 	curr = 0;
 	first = true;
 	done = false;
