@@ -163,7 +163,7 @@ input.addEventListener('input', function(event) {
 		}
 
 		// store wpm for individual word in array
-		wpmArr.push(parseInt((((promptArr[curr].length+1)/5)/((Date.now()-localTime)/60000)).toFixed(2)));
+		wpmArr.push(parseInt((((promptArr[curr].length)/5)/((Date.now()-localTime)/60000)).toFixed(2)));
 		localTime = Date.now();
         
         // clear the board and increment promptArr index
