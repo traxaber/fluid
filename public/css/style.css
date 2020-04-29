@@ -164,6 +164,7 @@ button:hover {
 }
 
 #popup {
+	text-align: center;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -201,13 +202,13 @@ tr, tbody {
 }
 
 #github {
-	position: fixed;
-	bottom: 30px;
-	width: 50px;
-	left: 50%;
-	margin-left:-25px;
+	font-size: 15px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+
+#github:hover {
+	box-shadow: 3px 3px var(--dark-2);
 }
 
 a:link {
